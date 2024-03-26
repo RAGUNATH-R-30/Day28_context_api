@@ -5,10 +5,16 @@ function Card({ data }) {
   const [show, setshow] = useState(false);
   const [quantity, setquantiy] = useState(0);
   const { total, settotal } = useContext(UserContext);
+  const{totalquantity,settotalquantiy}=useContext(UserContext);
+  
+  const dropdownitems = [0,1,2,3,4,5]
 
   let totalupdate = (num) => {
     let totalprice = num * data.price;
+    setquantiy(num)
+    setshow(false)
     settotal((prevtotal) => prevtotal + totalprice - quantity * data.price);
+    settotalquantiy((prevquantity)=>prevquantity-quantity+num)
   };
 
   return (
@@ -69,7 +75,7 @@ function Card({ data }) {
                   fontSize: 14,
                 }}
               >{`Rating:${data.rating}`}</p>
-              <hr />
+             
             </div>
           </div>
 
@@ -98,55 +104,13 @@ function Card({ data }) {
                       margin: "0",
                       transform: "translate(0px, 40px)",
                     }}
-                  >
-                    <li
-                      onClick={() => {
-                        setquantiy(0);
-                        totalupdate(0);
-
-                        setshow(false);
-                      }}
-                    >
-                      0
-                    </li>
-                    <li
-                      onClick={() => {
-                        setquantiy(1);
-                        totalupdate(1);
-                        setshow(false);
-                      }}
-                    >
-                      1
-                    </li>
-                    <li
-                      onClick={() => {
-                        setquantiy(2);
-                        totalupdate(2);
-                        setshow(false);
-                      }}
-                    >
-                      2
-                    </li>
-                    <li
-                      onClick={() => {
-                        setquantiy(3);
-                        totalupdate(3);
-
-                        setshow(false);
-                      }}
-                    >
-                      3
-                    </li>
-                    <li
-                      onClick={() => {
-                        setquantiy(4);
-                        totalupdate(4);
-
-                        setshow(false);
-                      }}
-                    >
-                      4
-                    </li>
+                  >{
+                    dropdownitems.map((item)=>(
+                      <li key={item}onClick={()=>totalupdate(item)}>
+                        {item}
+                      </li>
+                    ))
+                  }    
                   </ul>
                 </div>
               </span>
@@ -161,37 +125,7 @@ function Card({ data }) {
           </div>
         </div>
         <hr />
-        <div className="row mt-5">
-          <div className="col-lg-6 col-md-6 col-sm-6 text-start">
-            <div>
-              <p
-                style={{
-                  fontFamily: "monospace",
-                  fontWeight: "400",
-                  fontSize: 16,
-                  marginLeft: 10,
-                  color: "grey",
-                }}
-              >
-                SUB TOTAL
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-6 col-md-6 col-sm-6 text-end">
-            <div>
-              <p
-                style={{
-                  fontFamily: "monospace",
-                  fontWeight: "400",
-                  fontSize: 16,
-                  marginRight: 10,
-                }}
-              >{`${data.price}$`}</p>
-            </div>
-          </div>
-        </div>
-
+  
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-6 text-start">
             <div>
@@ -225,70 +159,9 @@ function Card({ data }) {
           </div>
         </div>
 
-        {/* <div className="row">
-          <div className="col-lg-6 col-md-6 col-sm-6 text-start">
-            <div>
-              <p
-                style={{
-                  fontFamily: "monospace",
-                  fontWeight: "bold",
-                  fontSize: 16,
-                  marginLeft: 10,
-                }}
-              >
-                TOTAL
-              </p>
-            </div>
-          </div>
-
-          <div className="col-lg-6 col-md-6 col-sm-6 text-end">
-            <div>
-              <p
-                style={{
-                  fontFamily: "monospace",
-                  fontWeight: "400",
-                  fontSize: 16,
-                  marginRight: 10,
-                  fontWeight: "bold",
-                }}
-              >{`Quantity:${quantity} ${total}$`}</p>
-            </div>
-          </div>
-        </div> */}
       </div>
     </div>
   );
 }
 
 export default Card;
-
-{
-  /* <div class="dropdown">
-<button
-  class="btn btn-secondary dropdown-toggle show"
-  type="button"
-  data-bs-toggle="dropdown"
-  aria-expanded="false"
->
-  1
-</button>
-
-<ul class="dropdown-menu ">
-  <li>
-    <a class="dropdown-item">
-      2
-    </a>
-  </li>
-  <li>
-    <a class="dropdown-item" >
-      3
-    </a>
-  </li>
-  <li>
-    <a class="dropdown-item" >
-      4
-    </a>
-  </li>
-</ul>
-</div> */
-}

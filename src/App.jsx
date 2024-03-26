@@ -109,21 +109,18 @@ function App() {
   return (
     <UserProvider>
       <div className="container-fluid" style={{ textAlign: "center" }}>
-        <div className="row">
-
-          <div className="col-lg-8">
+      <Total_card/>
             {data[0].products.map((item, index) => {
               return <Card data={item} key={index}></Card>;
             })}
-          </div>
-          
-          <div className="col-lg-4">
-            <Total_card/>
-          </div>
-        </div>
+                  
       </div>
+
     </UserProvider>
   );
 }
 
 export default App;
+{/* <div className="col-lg-4">
+            <Total_card/>
+          </div> */}
