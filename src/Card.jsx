@@ -5,16 +5,16 @@ function Card({ data }) {
   const [show, setshow] = useState(false);
   const [quantity, setquantiy] = useState(0);
   const { total, settotal } = useContext(UserContext);
-  const{totalquantity,settotalquantiy}=useContext(UserContext);
-  
-  const dropdownitems = [0,1,2,3,4,5]
+  const { totalquantity, settotalquantiy } = useContext(UserContext);
+
+  const dropdownitems = [0, 1, 2, 3, 4, 5];
 
   let totalupdate = (num) => {
     let totalprice = num * data.price;
-    setquantiy(num)
-    setshow(false)
+    setquantiy(num);
+    setshow(false);
     settotal((prevtotal) => prevtotal + totalprice - quantity * data.price);
-    settotalquantiy((prevquantity)=>prevquantity-quantity+num)
+    settotalquantiy((prevquantity) => prevquantity - quantity + num);
   };
 
   return (
@@ -75,7 +75,6 @@ function Card({ data }) {
                   fontSize: 14,
                 }}
               >{`Rating:${data.rating}`}</p>
-             
             </div>
           </div>
 
@@ -104,13 +103,12 @@ function Card({ data }) {
                       margin: "0",
                       transform: "translate(0px, 40px)",
                     }}
-                  >{
-                    dropdownitems.map((item)=>(
-                      <li key={item}onClick={()=>totalupdate(item)}>
+                  >
+                    {dropdownitems.map((item) => (
+                      <li key={item} onClick={() => totalupdate(item)}>
                         {item}
                       </li>
-                    ))
-                  }    
+                    ))}
                   </ul>
                 </div>
               </span>
@@ -125,7 +123,7 @@ function Card({ data }) {
           </div>
         </div>
         <hr />
-  
+
         <div className="row">
           <div className="col-lg-6 col-md-6 col-sm-6 text-start">
             <div>
@@ -158,7 +156,6 @@ function Card({ data }) {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
